@@ -1,12 +1,19 @@
-# data 目录说明
+# Experimental Data for the SDOA Oracle System
 
-- RQ2: 实验1数据，对应根目录中的实验1研究问题。
-  - 主要来源: deploy/docker-lab/logs-实验1
-- RQ3: 实验2数据，对应根目录中的实验2研究问题。
-  - 主要来源: deploy/docker-lab/logs-实验2
-  - 补充结果: deploy/docker-lab/results, deploy/docker-lab/results-exe2, deploy/docker-lab/results-node-scale
-- RQ4: 实验3数据，对应根目录中的实验3研究问题。
-  - 主要来源: deploy/docker-lab/logs/实验3, deploy/docker-lab/logs/实验3-test
-  - 绘图结果: deploy/docker-lab/logs/plots/exp3_scenarios, deploy/docker-lab/logs/plots/exp3_timelines
-- deploy-scripts: 一键式部署脚本。
-  - 目前包含: full-deploy.sh, deploy-and-sync-contracts.sh
+This directory contains the experimental datasets used in the evaluation of the SDOA oracle system. The data is organized by research question and supports the empirical results reported in the paper.
+
+## Research Questions
+
+- RQ2: How do the costs per request vary across the four service modes in the SDOA architecture?
+  - Data directory: `RQ2/exe1/`
+- RQ3: Does SDOA scale well under heavy workloads and saturation?
+  - Data directories: `RQ3/End-to-end execution latency/`, `RQ3/System throughput and P95 latency/`
+- RQ4: How resilient is SDOA against system failures and malicious attacks?
+  - Data directories: `RQ4/exe3/`, `RQ4/exp3_scenarios/`, `RQ4/exp3_timelines/`
+
+## Directory Structure
+
+- `RQ2/`: Experimental results for per-request cost analysis across different service modes.
+- `RQ3/`: Experimental results for scalability, throughput, and latency under increasing workload pressure.
+- `RQ4/`: Experimental results for resilience evaluation under failures and adversarial conditions.
+- `deploy-scripts/`: Deployment and synchronization scripts used to run the experiments.
