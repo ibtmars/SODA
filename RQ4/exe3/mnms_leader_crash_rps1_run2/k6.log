@@ -1,0 +1,678 @@
+ Container oracle-lab-k6-run-a033db2af96f Creating 
+ Container oracle-lab-k6-run-a033db2af96f Created 
+
+         /\      Grafana   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+
+     execution: local
+        script: /scripts/publish.js
+        output: -
+
+     scenarios: (100.00%) 1 scenario, 100 max VUs, 3m30s max duration (incl. graceful stop):
+              * fixed_rate: 1.00 iterations/s for 3m0s (maxVUs: 20-100, gracefulStop: 30s)
+
+time="2026-03-21T07:21:48Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (0m01.0s), 000/020 VUs, 1 complete and 0 interrupted iterations
+fixed_rate   [   1% ] 000/020 VUs  0m01.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:21:49Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (0m02.0s), 001/020 VUs, 1 complete and 0 interrupted iterations
+fixed_rate   [   1% ] 001/020 VUs  0m02.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:21:50Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (0m03.0s), 000/020 VUs, 3 complete and 0 interrupted iterations
+fixed_rate   [   2% ] 000/020 VUs  0m03.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:21:51Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (0m04.0s), 000/020 VUs, 4 complete and 0 interrupted iterations
+fixed_rate   [   2% ] 000/020 VUs  0m04.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:21:52Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (0m05.0s), 000/020 VUs, 5 complete and 0 interrupted iterations
+fixed_rate   [   3% ] 000/020 VUs  0m05.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:21:53Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (0m06.0s), 001/020 VUs, 5 complete and 0 interrupted iterations
+fixed_rate   [   3% ] 001/020 VUs  0m06.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:21:54Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (0m07.0s), 001/020 VUs, 6 complete and 0 interrupted iterations
+fixed_rate   [   4% ] 001/020 VUs  0m07.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:21:55Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (0m08.0s), 001/020 VUs, 7 complete and 0 interrupted iterations
+fixed_rate   [   4% ] 001/020 VUs  0m08.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:21:56Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (0m09.0s), 001/020 VUs, 8 complete and 0 interrupted iterations
+fixed_rate   [   5% ] 001/020 VUs  0m09.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:21:57Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (0m10.0s), 001/020 VUs, 9 complete and 0 interrupted iterations
+fixed_rate   [   6% ] 001/020 VUs  0m10.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:21:58Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (0m11.0s), 002/020 VUs, 9 complete and 0 interrupted iterations
+fixed_rate   [   6% ] 002/020 VUs  0m11.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:21:59Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (0m12.0s), 002/020 VUs, 10 complete and 0 interrupted iterations
+fixed_rate   [   7% ] 002/020 VUs  0m12.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:22:00Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (0m13.0s), 002/020 VUs, 11 complete and 0 interrupted iterations
+fixed_rate   [   7% ] 002/020 VUs  0m13.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:22:01Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (0m14.0s), 003/020 VUs, 11 complete and 0 interrupted iterations
+fixed_rate   [   8% ] 003/020 VUs  0m14.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:22:02Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (0m15.0s), 003/020 VUs, 12 complete and 0 interrupted iterations
+fixed_rate   [   8% ] 003/020 VUs  0m15.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:22:03Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (0m16.0s), 003/020 VUs, 13 complete and 0 interrupted iterations
+fixed_rate   [   9% ] 003/020 VUs  0m16.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:22:04Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (0m17.0s), 003/020 VUs, 14 complete and 0 interrupted iterations
+fixed_rate   [   9% ] 003/020 VUs  0m17.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:22:05Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (0m18.0s), 003/020 VUs, 15 complete and 0 interrupted iterations
+fixed_rate   [  10% ] 003/020 VUs  0m18.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:22:06Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (0m19.0s), 003/020 VUs, 16 complete and 0 interrupted iterations
+fixed_rate   [  11% ] 003/020 VUs  0m19.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:22:07Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (0m20.0s), 003/020 VUs, 17 complete and 0 interrupted iterations
+fixed_rate   [  11% ] 003/020 VUs  0m20.0s/3m0s  1.00 iters/s
+
+running (0m21.0s), 004/020 VUs, 17 complete and 0 interrupted iterations
+fixed_rate   [  12% ] 004/020 VUs  0m21.0s/3m0s  1.00 iters/s
+
+running (0m22.0s), 004/020 VUs, 18 complete and 0 interrupted iterations
+fixed_rate   [  12% ] 004/020 VUs  0m22.0s/3m0s  1.00 iters/s
+
+running (0m23.0s), 003/020 VUs, 20 complete and 0 interrupted iterations
+fixed_rate   [  13% ] 003/020 VUs  0m23.0s/3m0s  1.00 iters/s
+
+running (0m24.0s), 004/020 VUs, 20 complete and 0 interrupted iterations
+fixed_rate   [  13% ] 004/020 VUs  0m24.0s/3m0s  1.00 iters/s
+
+running (0m25.0s), 004/020 VUs, 21 complete and 0 interrupted iterations
+fixed_rate   [  14% ] 004/020 VUs  0m25.0s/3m0s  1.00 iters/s
+
+running (0m26.0s), 004/020 VUs, 22 complete and 0 interrupted iterations
+fixed_rate   [  14% ] 004/020 VUs  0m26.0s/3m0s  1.00 iters/s
+
+running (0m27.0s), 004/020 VUs, 23 complete and 0 interrupted iterations
+fixed_rate   [  15% ] 004/020 VUs  0m27.0s/3m0s  1.00 iters/s
+
+running (0m28.0s), 004/020 VUs, 24 complete and 0 interrupted iterations
+fixed_rate   [  16% ] 004/020 VUs  0m28.0s/3m0s  1.00 iters/s
+
+running (0m29.0s), 004/020 VUs, 25 complete and 0 interrupted iterations
+fixed_rate   [  16% ] 004/020 VUs  0m29.0s/3m0s  1.00 iters/s
+
+running (0m30.0s), 004/020 VUs, 26 complete and 0 interrupted iterations
+fixed_rate   [  17% ] 004/020 VUs  0m30.0s/3m0s  1.00 iters/s
+
+running (0m31.0s), 005/020 VUs, 26 complete and 0 interrupted iterations
+fixed_rate   [  17% ] 005/020 VUs  0m31.0s/3m0s  1.00 iters/s
+
+running (0m32.0s), 005/020 VUs, 27 complete and 0 interrupted iterations
+fixed_rate   [  18% ] 005/020 VUs  0m32.0s/3m0s  1.00 iters/s
+
+running (0m33.0s), 005/020 VUs, 28 complete and 0 interrupted iterations
+fixed_rate   [  18% ] 005/020 VUs  0m33.0s/3m0s  1.00 iters/s
+
+running (0m34.0s), 005/020 VUs, 29 complete and 0 interrupted iterations
+fixed_rate   [  19% ] 005/020 VUs  0m34.0s/3m0s  1.00 iters/s
+
+running (0m35.0s), 005/020 VUs, 30 complete and 0 interrupted iterations
+fixed_rate   [  19% ] 005/020 VUs  0m35.0s/3m0s  1.00 iters/s
+
+running (0m36.0s), 005/020 VUs, 31 complete and 0 interrupted iterations
+fixed_rate   [  20% ] 005/020 VUs  0m36.0s/3m0s  1.00 iters/s
+
+running (0m37.0s), 005/020 VUs, 32 complete and 0 interrupted iterations
+fixed_rate   [  21% ] 005/020 VUs  0m37.0s/3m0s  1.00 iters/s
+
+running (0m38.0s), 005/020 VUs, 33 complete and 0 interrupted iterations
+fixed_rate   [  21% ] 005/020 VUs  0m38.0s/3m0s  1.00 iters/s
+
+running (0m39.0s), 005/020 VUs, 34 complete and 0 interrupted iterations
+fixed_rate   [  22% ] 005/020 VUs  0m39.0s/3m0s  1.00 iters/s
+
+running (0m40.0s), 005/020 VUs, 35 complete and 0 interrupted iterations
+fixed_rate   [  22% ] 005/020 VUs  0m40.0s/3m0s  1.00 iters/s
+
+running (0m41.0s), 006/020 VUs, 35 complete and 0 interrupted iterations
+fixed_rate   [  23% ] 006/020 VUs  0m41.0s/3m0s  1.00 iters/s
+
+running (0m42.0s), 006/020 VUs, 36 complete and 0 interrupted iterations
+fixed_rate   [  23% ] 006/020 VUs  0m42.0s/3m0s  1.00 iters/s
+
+running (0m43.0s), 006/020 VUs, 37 complete and 0 interrupted iterations
+fixed_rate   [  24% ] 006/020 VUs  0m43.0s/3m0s  1.00 iters/s
+
+running (0m44.0s), 007/020 VUs, 37 complete and 0 interrupted iterations
+fixed_rate   [  24% ] 007/020 VUs  0m44.0s/3m0s  1.00 iters/s
+
+running (0m45.0s), 007/020 VUs, 38 complete and 0 interrupted iterations
+fixed_rate   [  25% ] 007/020 VUs  0m45.0s/3m0s  1.00 iters/s
+
+running (0m46.0s), 007/020 VUs, 39 complete and 0 interrupted iterations
+fixed_rate   [  26% ] 007/020 VUs  0m46.0s/3m0s  1.00 iters/s
+
+running (0m47.0s), 007/020 VUs, 40 complete and 0 interrupted iterations
+fixed_rate   [  26% ] 007/020 VUs  0m47.0s/3m0s  1.00 iters/s
+
+running (0m48.0s), 008/020 VUs, 40 complete and 0 interrupted iterations
+fixed_rate   [  27% ] 008/020 VUs  0m48.0s/3m0s  1.00 iters/s
+
+running (0m49.0s), 008/020 VUs, 41 complete and 0 interrupted iterations
+fixed_rate   [  27% ] 008/020 VUs  0m49.0s/3m0s  1.00 iters/s
+
+running (0m50.0s), 008/020 VUs, 42 complete and 0 interrupted iterations
+fixed_rate   [  28% ] 008/020 VUs  0m50.0s/3m0s  1.00 iters/s
+
+running (0m51.0s), 009/020 VUs, 42 complete and 0 interrupted iterations
+fixed_rate   [  28% ] 009/020 VUs  0m51.0s/3m0s  1.00 iters/s
+
+running (0m52.0s), 009/020 VUs, 43 complete and 0 interrupted iterations
+fixed_rate   [  29% ] 009/020 VUs  0m52.0s/3m0s  1.00 iters/s
+
+running (0m53.0s), 009/020 VUs, 44 complete and 0 interrupted iterations
+fixed_rate   [  29% ] 009/020 VUs  0m53.0s/3m0s  1.00 iters/s
+
+running (0m54.0s), 009/020 VUs, 45 complete and 0 interrupted iterations
+fixed_rate   [  30% ] 009/020 VUs  0m54.0s/3m0s  1.00 iters/s
+
+running (0m55.0s), 010/020 VUs, 45 complete and 0 interrupted iterations
+fixed_rate   [  31% ] 010/020 VUs  0m55.0s/3m0s  1.00 iters/s
+
+running (0m56.0s), 010/020 VUs, 46 complete and 0 interrupted iterations
+fixed_rate   [  31% ] 010/020 VUs  0m56.0s/3m0s  1.00 iters/s
+
+running (0m57.0s), 010/020 VUs, 47 complete and 0 interrupted iterations
+fixed_rate   [  32% ] 010/020 VUs  0m57.0s/3m0s  1.00 iters/s
+
+running (0m58.0s), 009/020 VUs, 49 complete and 0 interrupted iterations
+fixed_rate   [  32% ] 009/020 VUs  0m58.0s/3m0s  1.00 iters/s
+
+running (0m59.0s), 010/020 VUs, 49 complete and 0 interrupted iterations
+fixed_rate   [  33% ] 010/020 VUs  0m59.0s/3m0s  1.00 iters/s
+
+running (1m00.0s), 010/020 VUs, 50 complete and 0 interrupted iterations
+fixed_rate   [  33% ] 010/020 VUs  1m00.0s/3m0s  1.00 iters/s
+
+running (1m01.0s), 010/020 VUs, 51 complete and 0 interrupted iterations
+fixed_rate   [  34% ] 010/020 VUs  1m01.0s/3m0s  1.00 iters/s
+
+running (1m02.0s), 011/020 VUs, 51 complete and 0 interrupted iterations
+fixed_rate   [  34% ] 011/020 VUs  1m02.0s/3m0s  1.00 iters/s
+
+running (1m03.0s), 011/020 VUs, 52 complete and 0 interrupted iterations
+fixed_rate   [  35% ] 011/020 VUs  1m03.0s/3m0s  1.00 iters/s
+
+running (1m04.0s), 011/020 VUs, 53 complete and 0 interrupted iterations
+fixed_rate   [  36% ] 011/020 VUs  1m04.0s/3m0s  1.00 iters/s
+
+running (1m05.0s), 011/020 VUs, 54 complete and 0 interrupted iterations
+fixed_rate   [  36% ] 011/020 VUs  1m05.0s/3m0s  1.00 iters/s
+
+running (1m06.0s), 012/020 VUs, 54 complete and 0 interrupted iterations
+fixed_rate   [  37% ] 012/020 VUs  1m06.0s/3m0s  1.00 iters/s
+
+running (1m07.0s), 012/020 VUs, 55 complete and 0 interrupted iterations
+fixed_rate   [  37% ] 012/020 VUs  1m07.0s/3m0s  1.00 iters/s
+
+running (1m08.0s), 012/020 VUs, 56 complete and 0 interrupted iterations
+fixed_rate   [  38% ] 012/020 VUs  1m08.0s/3m0s  1.00 iters/s
+
+running (1m09.0s), 012/020 VUs, 57 complete and 0 interrupted iterations
+fixed_rate   [  38% ] 012/020 VUs  1m09.0s/3m0s  1.00 iters/s
+
+running (1m10.0s), 012/020 VUs, 58 complete and 0 interrupted iterations
+fixed_rate   [  39% ] 012/020 VUs  1m10.0s/3m0s  1.00 iters/s
+
+running (1m11.0s), 012/020 VUs, 59 complete and 0 interrupted iterations
+fixed_rate   [  39% ] 012/020 VUs  1m11.0s/3m0s  1.00 iters/s
+
+running (1m12.0s), 013/020 VUs, 59 complete and 0 interrupted iterations
+fixed_rate   [  40% ] 013/020 VUs  1m12.0s/3m0s  1.00 iters/s
+
+running (1m13.0s), 013/020 VUs, 60 complete and 0 interrupted iterations
+fixed_rate   [  41% ] 013/020 VUs  1m13.0s/3m0s  1.00 iters/s
+
+running (1m14.0s), 012/020 VUs, 62 complete and 0 interrupted iterations
+fixed_rate   [  41% ] 012/020 VUs  1m14.0s/3m0s  1.00 iters/s
+
+running (1m15.0s), 013/020 VUs, 62 complete and 0 interrupted iterations
+fixed_rate   [  42% ] 013/020 VUs  1m15.0s/3m0s  1.00 iters/s
+
+running (1m16.0s), 014/020 VUs, 62 complete and 0 interrupted iterations
+fixed_rate   [  42% ] 014/020 VUs  1m16.0s/3m0s  1.00 iters/s
+
+running (1m17.0s), 015/020 VUs, 62 complete and 0 interrupted iterations
+fixed_rate   [  43% ] 015/020 VUs  1m17.0s/3m0s  1.00 iters/s
+
+running (1m18.0s), 015/020 VUs, 63 complete and 0 interrupted iterations
+fixed_rate   [  43% ] 015/020 VUs  1m18.0s/3m0s  1.00 iters/s
+
+running (1m19.0s), 015/020 VUs, 64 complete and 0 interrupted iterations
+fixed_rate   [  44% ] 015/020 VUs  1m19.0s/3m0s  1.00 iters/s
+
+running (1m20.0s), 015/020 VUs, 65 complete and 0 interrupted iterations
+fixed_rate   [  44% ] 015/020 VUs  1m20.0s/3m0s  1.00 iters/s
+
+running (1m21.0s), 015/020 VUs, 66 complete and 0 interrupted iterations
+fixed_rate   [  45% ] 015/020 VUs  1m21.0s/3m0s  1.00 iters/s
+
+running (1m22.0s), 015/020 VUs, 67 complete and 0 interrupted iterations
+fixed_rate   [  46% ] 015/020 VUs  1m22.0s/3m0s  1.00 iters/s
+
+running (1m23.0s), 015/020 VUs, 68 complete and 0 interrupted iterations
+fixed_rate   [  46% ] 015/020 VUs  1m23.0s/3m0s  1.00 iters/s
+
+running (1m24.0s), 015/020 VUs, 69 complete and 0 interrupted iterations
+fixed_rate   [  47% ] 015/020 VUs  1m24.0s/3m0s  1.00 iters/s
+
+running (1m25.0s), 015/020 VUs, 70 complete and 0 interrupted iterations
+fixed_rate   [  47% ] 015/020 VUs  1m25.0s/3m0s  1.00 iters/s
+
+running (1m26.0s), 016/020 VUs, 70 complete and 0 interrupted iterations
+fixed_rate   [  48% ] 016/020 VUs  1m26.0s/3m0s  1.00 iters/s
+
+running (1m27.0s), 016/020 VUs, 71 complete and 0 interrupted iterations
+fixed_rate   [  48% ] 016/020 VUs  1m27.0s/3m0s  1.00 iters/s
+
+running (1m28.0s), 016/020 VUs, 72 complete and 0 interrupted iterations
+fixed_rate   [  49% ] 016/020 VUs  1m28.0s/3m0s  1.00 iters/s
+
+running (1m29.0s), 016/020 VUs, 73 complete and 0 interrupted iterations
+fixed_rate   [  49% ] 016/020 VUs  1m29.0s/3m0s  1.00 iters/s
+
+running (1m30.0s), 017/020 VUs, 73 complete and 0 interrupted iterations
+fixed_rate   [  50% ] 017/020 VUs  1m30.0s/3m0s  1.00 iters/s
+
+running (1m31.0s), 016/020 VUs, 75 complete and 0 interrupted iterations
+fixed_rate   [  51% ] 016/020 VUs  1m31.0s/3m0s  1.00 iters/s
+
+running (1m32.0s), 017/020 VUs, 75 complete and 0 interrupted iterations
+fixed_rate   [  51% ] 017/020 VUs  1m32.0s/3m0s  1.00 iters/s
+
+running (1m33.0s), 017/020 VUs, 76 complete and 0 interrupted iterations
+fixed_rate   [  52% ] 017/020 VUs  1m33.0s/3m0s  1.00 iters/s
+
+running (1m34.0s), 017/020 VUs, 77 complete and 0 interrupted iterations
+fixed_rate   [  52% ] 017/020 VUs  1m34.0s/3m0s  1.00 iters/s
+
+running (1m35.0s), 017/020 VUs, 78 complete and 0 interrupted iterations
+fixed_rate   [  53% ] 017/020 VUs  1m35.0s/3m0s  1.00 iters/s
+
+running (1m36.0s), 017/020 VUs, 79 complete and 0 interrupted iterations
+fixed_rate   [  53% ] 017/020 VUs  1m36.0s/3m0s  1.00 iters/s
+
+running (1m37.0s), 018/020 VUs, 79 complete and 0 interrupted iterations
+fixed_rate   [  54% ] 018/020 VUs  1m37.0s/3m0s  1.00 iters/s
+
+running (1m38.0s), 018/020 VUs, 80 complete and 0 interrupted iterations
+fixed_rate   [  54% ] 018/020 VUs  1m38.0s/3m0s  1.00 iters/s
+
+running (1m39.0s), 018/020 VUs, 81 complete and 0 interrupted iterations
+fixed_rate   [  55% ] 018/020 VUs  1m39.0s/3m0s  1.00 iters/s
+
+running (1m40.0s), 018/020 VUs, 82 complete and 0 interrupted iterations
+fixed_rate   [  56% ] 018/020 VUs  1m40.0s/3m0s  1.00 iters/s
+
+running (1m41.0s), 018/020 VUs, 83 complete and 0 interrupted iterations
+fixed_rate   [  56% ] 018/020 VUs  1m41.0s/3m0s  1.00 iters/s
+
+running (1m42.0s), 018/020 VUs, 84 complete and 0 interrupted iterations
+fixed_rate   [  57% ] 018/020 VUs  1m42.0s/3m0s  1.00 iters/s
+
+running (1m43.0s), 019/020 VUs, 84 complete and 0 interrupted iterations
+fixed_rate   [  57% ] 019/020 VUs  1m43.0s/3m0s  1.00 iters/s
+
+running (1m44.0s), 018/020 VUs, 86 complete and 0 interrupted iterations
+fixed_rate   [  58% ] 018/020 VUs  1m44.0s/3m0s  1.00 iters/s
+
+running (1m45.0s), 019/020 VUs, 86 complete and 0 interrupted iterations
+fixed_rate   [  58% ] 019/020 VUs  1m45.0s/3m0s  1.00 iters/s
+
+running (1m46.0s), 018/020 VUs, 88 complete and 0 interrupted iterations
+fixed_rate   [  59% ] 018/020 VUs  1m46.0s/3m0s  1.00 iters/s
+
+running (1m47.0s), 018/020 VUs, 89 complete and 0 interrupted iterations
+fixed_rate   [  59% ] 018/020 VUs  1m47.0s/3m0s  1.00 iters/s
+
+running (1m48.0s), 018/020 VUs, 90 complete and 0 interrupted iterations
+fixed_rate   [  60% ] 018/020 VUs  1m48.0s/3m0s  1.00 iters/s
+
+running (1m49.0s), 019/020 VUs, 90 complete and 0 interrupted iterations
+fixed_rate   [  61% ] 019/020 VUs  1m49.0s/3m0s  1.00 iters/s
+
+running (1m50.0s), 019/020 VUs, 91 complete and 0 interrupted iterations
+fixed_rate   [  61% ] 019/020 VUs  1m50.0s/3m0s  1.00 iters/s
+
+running (1m51.0s), 019/020 VUs, 92 complete and 0 interrupted iterations
+fixed_rate   [  62% ] 019/020 VUs  1m51.0s/3m0s  1.00 iters/s
+
+running (1m52.0s), 019/020 VUs, 93 complete and 0 interrupted iterations
+fixed_rate   [  62% ] 019/020 VUs  1m52.0s/3m0s  1.00 iters/s
+
+running (1m53.0s), 020/020 VUs, 93 complete and 0 interrupted iterations
+fixed_rate   [  63% ] 020/020 VUs  1m53.0s/3m0s  1.00 iters/s
+
+running (1m54.0s), 019/021 VUs, 94 complete and 0 interrupted iterations
+fixed_rate   [  63% ] 019/021 VUs  1m54.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:23:42Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (1m55.0s), 020/021 VUs, 94 complete and 0 interrupted iterations
+fixed_rate   [  64% ] 020/021 VUs  1m55.0s/3m0s  1.00 iters/s
+
+running (1m56.0s), 020/021 VUs, 95 complete and 0 interrupted iterations
+fixed_rate   [  64% ] 020/021 VUs  1m56.0s/3m0s  1.00 iters/s
+
+running (1m57.0s), 020/021 VUs, 96 complete and 0 interrupted iterations
+fixed_rate   [  65% ] 020/021 VUs  1m57.0s/3m0s  1.00 iters/s
+
+running (1m58.0s), 020/021 VUs, 97 complete and 0 interrupted iterations
+fixed_rate   [  66% ] 020/021 VUs  1m58.0s/3m0s  1.00 iters/s
+
+running (1m59.0s), 020/021 VUs, 98 complete and 0 interrupted iterations
+fixed_rate   [  66% ] 020/021 VUs  1m59.0s/3m0s  1.00 iters/s
+
+running (2m00.0s), 020/021 VUs, 99 complete and 0 interrupted iterations
+fixed_rate   [  67% ] 020/021 VUs  2m00.0s/3m0s  1.00 iters/s
+
+running (2m01.0s), 020/021 VUs, 100 complete and 0 interrupted iterations
+fixed_rate   [  67% ] 020/021 VUs  2m01.0s/3m0s  1.00 iters/s
+
+running (2m02.0s), 020/021 VUs, 101 complete and 0 interrupted iterations
+fixed_rate   [  68% ] 020/021 VUs  2m02.0s/3m0s  1.00 iters/s
+
+running (2m03.0s), 020/021 VUs, 102 complete and 0 interrupted iterations
+fixed_rate   [  68% ] 020/021 VUs  2m03.0s/3m0s  1.00 iters/s
+
+running (2m04.0s), 020/021 VUs, 103 complete and 0 interrupted iterations
+fixed_rate   [  69% ] 020/021 VUs  2m04.0s/3m0s  1.00 iters/s
+
+running (2m05.0s), 021/021 VUs, 103 complete and 0 interrupted iterations
+fixed_rate   [  69% ] 021/021 VUs  2m05.0s/3m0s  1.00 iters/s
+
+running (2m06.0s), 019/022 VUs, 105 complete and 0 interrupted iterations
+fixed_rate   [  70% ] 019/022 VUs  2m06.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:23:54Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (2m07.0s), 020/022 VUs, 105 complete and 0 interrupted iterations
+fixed_rate   [  71% ] 020/022 VUs  2m07.0s/3m0s  1.00 iters/s
+
+running (2m08.0s), 020/022 VUs, 106 complete and 0 interrupted iterations
+fixed_rate   [  71% ] 020/022 VUs  2m08.0s/3m0s  1.00 iters/s
+
+running (2m09.0s), 019/022 VUs, 108 complete and 0 interrupted iterations
+fixed_rate   [  72% ] 019/022 VUs  2m09.0s/3m0s  1.00 iters/s
+
+running (2m10.0s), 020/022 VUs, 108 complete and 0 interrupted iterations
+fixed_rate   [  72% ] 020/022 VUs  2m10.0s/3m0s  1.00 iters/s
+
+running (2m11.0s), 020/022 VUs, 109 complete and 0 interrupted iterations
+fixed_rate   [  73% ] 020/022 VUs  2m11.0s/3m0s  1.00 iters/s
+
+running (2m12.0s), 020/022 VUs, 110 complete and 0 interrupted iterations
+fixed_rate   [  73% ] 020/022 VUs  2m12.0s/3m0s  1.00 iters/s
+
+running (2m13.0s), 020/022 VUs, 111 complete and 0 interrupted iterations
+fixed_rate   [  74% ] 020/022 VUs  2m13.0s/3m0s  1.00 iters/s
+
+running (2m14.0s), 020/022 VUs, 112 complete and 0 interrupted iterations
+fixed_rate   [  74% ] 020/022 VUs  2m14.0s/3m0s  1.00 iters/s
+
+running (2m15.0s), 020/022 VUs, 113 complete and 0 interrupted iterations
+fixed_rate   [  75% ] 020/022 VUs  2m15.0s/3m0s  1.00 iters/s
+
+running (2m16.0s), 021/022 VUs, 113 complete and 0 interrupted iterations
+fixed_rate   [  76% ] 021/022 VUs  2m16.0s/3m0s  1.00 iters/s
+
+running (2m17.0s), 021/022 VUs, 114 complete and 0 interrupted iterations
+fixed_rate   [  76% ] 021/022 VUs  2m17.0s/3m0s  1.00 iters/s
+
+running (2m18.0s), 022/022 VUs, 114 complete and 0 interrupted iterations
+fixed_rate   [  77% ] 022/022 VUs  2m18.0s/3m0s  1.00 iters/s
+
+running (2m19.0s), 021/023 VUs, 115 complete and 0 interrupted iterations
+fixed_rate   [  77% ] 021/023 VUs  2m19.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:24:07Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (2m20.0s), 021/023 VUs, 116 complete and 0 interrupted iterations
+fixed_rate   [  78% ] 021/023 VUs  2m20.0s/3m0s  1.00 iters/s
+
+running (2m21.0s), 021/023 VUs, 117 complete and 0 interrupted iterations
+fixed_rate   [  78% ] 021/023 VUs  2m21.0s/3m0s  1.00 iters/s
+
+running (2m22.0s), 020/023 VUs, 119 complete and 0 interrupted iterations
+fixed_rate   [  79% ] 020/023 VUs  2m22.0s/3m0s  1.00 iters/s
+
+running (2m23.0s), 020/023 VUs, 120 complete and 0 interrupted iterations
+fixed_rate   [  79% ] 020/023 VUs  2m23.0s/3m0s  1.00 iters/s
+
+running (2m24.0s), 020/023 VUs, 121 complete and 0 interrupted iterations
+fixed_rate   [  80% ] 020/023 VUs  2m24.0s/3m0s  1.00 iters/s
+
+running (2m25.0s), 020/023 VUs, 122 complete and 0 interrupted iterations
+fixed_rate   [  81% ] 020/023 VUs  2m25.0s/3m0s  1.00 iters/s
+
+running (2m26.0s), 020/023 VUs, 123 complete and 0 interrupted iterations
+fixed_rate   [  81% ] 020/023 VUs  2m26.0s/3m0s  1.00 iters/s
+
+running (2m27.0s), 020/023 VUs, 124 complete and 0 interrupted iterations
+fixed_rate   [  82% ] 020/023 VUs  2m27.0s/3m0s  1.00 iters/s
+
+running (2m28.0s), 021/023 VUs, 124 complete and 0 interrupted iterations
+fixed_rate   [  82% ] 021/023 VUs  2m28.0s/3m0s  1.00 iters/s
+
+running (2m29.0s), 021/023 VUs, 125 complete and 0 interrupted iterations
+fixed_rate   [  83% ] 021/023 VUs  2m29.0s/3m0s  1.00 iters/s
+
+running (2m30.0s), 022/023 VUs, 125 complete and 0 interrupted iterations
+fixed_rate   [  83% ] 022/023 VUs  2m30.0s/3m0s  1.00 iters/s
+
+running (2m31.0s), 022/023 VUs, 126 complete and 0 interrupted iterations
+fixed_rate   [  84% ] 022/023 VUs  2m31.0s/3m0s  1.00 iters/s
+
+running (2m32.0s), 022/023 VUs, 127 complete and 0 interrupted iterations
+fixed_rate   [  84% ] 022/023 VUs  2m32.0s/3m0s  1.00 iters/s
+
+running (2m33.0s), 022/023 VUs, 128 complete and 0 interrupted iterations
+fixed_rate   [  85% ] 022/023 VUs  2m33.0s/3m0s  1.00 iters/s
+
+running (2m34.0s), 022/023 VUs, 129 complete and 0 interrupted iterations
+fixed_rate   [  86% ] 022/023 VUs  2m34.0s/3m0s  1.00 iters/s
+
+running (2m35.0s), 022/023 VUs, 130 complete and 0 interrupted iterations
+fixed_rate   [  86% ] 022/023 VUs  2m35.0s/3m0s  1.00 iters/s
+
+running (2m36.0s), 022/023 VUs, 131 complete and 0 interrupted iterations
+fixed_rate   [  87% ] 022/023 VUs  2m36.0s/3m0s  1.00 iters/s
+
+running (2m37.0s), 022/023 VUs, 132 complete and 0 interrupted iterations
+fixed_rate   [  87% ] 022/023 VUs  2m37.0s/3m0s  1.00 iters/s
+
+running (2m38.0s), 022/023 VUs, 133 complete and 0 interrupted iterations
+fixed_rate   [  88% ] 022/023 VUs  2m38.0s/3m0s  1.00 iters/s
+
+running (2m39.0s), 023/023 VUs, 133 complete and 0 interrupted iterations
+fixed_rate   [  88% ] 023/023 VUs  2m39.0s/3m0s  1.00 iters/s
+
+running (2m40.0s), 022/024 VUs, 134 complete and 0 interrupted iterations
+fixed_rate   [  89% ] 022/024 VUs  2m40.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:24:28Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (2m41.0s), 022/024 VUs, 135 complete and 0 interrupted iterations
+fixed_rate   [  89% ] 022/024 VUs  2m41.0s/3m0s  1.00 iters/s
+
+running (2m42.0s), 022/024 VUs, 136 complete and 0 interrupted iterations
+fixed_rate   [  90% ] 022/024 VUs  2m42.0s/3m0s  1.00 iters/s
+
+running (2m43.0s), 023/024 VUs, 136 complete and 0 interrupted iterations
+fixed_rate   [  91% ] 023/024 VUs  2m43.0s/3m0s  1.00 iters/s
+
+running (2m44.0s), 023/024 VUs, 137 complete and 0 interrupted iterations
+fixed_rate   [  91% ] 023/024 VUs  2m44.0s/3m0s  1.00 iters/s
+
+running (2m45.0s), 023/024 VUs, 138 complete and 0 interrupted iterations
+fixed_rate   [  92% ] 023/024 VUs  2m45.0s/3m0s  1.00 iters/s
+
+running (2m46.0s), 023/024 VUs, 139 complete and 0 interrupted iterations
+fixed_rate   [  92% ] 023/024 VUs  2m46.0s/3m0s  1.00 iters/s
+
+running (2m47.0s), 023/024 VUs, 140 complete and 0 interrupted iterations
+fixed_rate   [  93% ] 023/024 VUs  2m47.0s/3m0s  1.00 iters/s
+
+running (2m48.0s), 023/024 VUs, 141 complete and 0 interrupted iterations
+fixed_rate   [  93% ] 023/024 VUs  2m48.0s/3m0s  1.00 iters/s
+
+running (2m49.0s), 023/024 VUs, 142 complete and 0 interrupted iterations
+fixed_rate   [  94% ] 023/024 VUs  2m49.0s/3m0s  1.00 iters/s
+
+running (2m50.0s), 023/024 VUs, 143 complete and 0 interrupted iterations
+fixed_rate   [  94% ] 023/024 VUs  2m50.0s/3m0s  1.00 iters/s
+
+running (2m51.0s), 024/024 VUs, 143 complete and 0 interrupted iterations
+fixed_rate   [  95% ] 024/024 VUs  2m51.0s/3m0s  1.00 iters/s
+
+running (2m52.0s), 022/025 VUs, 145 complete and 0 interrupted iterations
+fixed_rate   [  96% ] 022/025 VUs  2m52.0s/3m0s  1.00 iters/s
+time="2026-03-21T07:24:40Z" level=info msg="[INFO] effective data source urls for current request: [\"http://host.docker.internal:8080/\",\"http://host.docker.internal:8081/\",\"http://host.docker.internal:8082/\",\"http://host.docker.internal:8083/\",\"http://host.docker.internal:8084/\",\"http://host.docker.internal:8085/\",\"http://host.docker.internal:8086/\"]; esCount=7" source=console
+
+running (2m53.0s), 022/025 VUs, 146 complete and 0 interrupted iterations
+fixed_rate   [  96% ] 022/025 VUs  2m53.0s/3m0s  1.00 iters/s
+
+running (2m54.0s), 023/025 VUs, 146 complete and 0 interrupted iterations
+fixed_rate   [  97% ] 023/025 VUs  2m54.0s/3m0s  1.00 iters/s
+
+running (2m55.0s), 023/025 VUs, 147 complete and 0 interrupted iterations
+fixed_rate   [  97% ] 023/025 VUs  2m55.0s/3m0s  1.00 iters/s
+
+running (2m56.0s), 023/025 VUs, 148 complete and 0 interrupted iterations
+fixed_rate   [  98% ] 023/025 VUs  2m56.0s/3m0s  1.00 iters/s
+
+running (2m57.0s), 023/025 VUs, 149 complete and 0 interrupted iterations
+fixed_rate   [  98% ] 023/025 VUs  2m57.0s/3m0s  1.00 iters/s
+
+running (2m58.0s), 023/025 VUs, 150 complete and 0 interrupted iterations
+fixed_rate   [  99% ] 023/025 VUs  2m58.0s/3m0s  1.00 iters/s
+
+running (2m59.0s), 023/025 VUs, 151 complete and 0 interrupted iterations
+fixed_rate   [  99% ] 023/025 VUs  2m59.0s/3m0s  1.00 iters/s
+
+running (3m00.0s), 023/025 VUs, 152 complete and 0 interrupted iterations
+fixed_rate   [ 100% ] 023/025 VUs  3m00.0s/3m0s  1.00 iters/s
+
+running (3m01.0s), 022/025 VUs, 153 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+running (3m02.0s), 021/025 VUs, 154 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+running (3m03.0s), 020/025 VUs, 155 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+running (3m04.0s), 019/025 VUs, 156 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+running (3m05.0s), 018/025 VUs, 157 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+running (3m06.0s), 017/025 VUs, 158 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+running (3m07.0s), 016/025 VUs, 159 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+running (3m08.0s), 015/025 VUs, 160 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+running (3m09.0s), 014/025 VUs, 161 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+running (3m10.0s), 014/025 VUs, 161 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+running (3m11.0s), 012/025 VUs, 163 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+running (3m12.0s), 012/025 VUs, 163 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+running (3m13.0s), 011/025 VUs, 164 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+running (3m14.0s), 009/025 VUs, 166 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+running (3m15.0s), 008/025 VUs, 167 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+running (3m16.0s), 008/025 VUs, 167 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+running (3m17.0s), 007/025 VUs, 168 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+running (3m18.0s), 006/025 VUs, 169 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+running (3m19.0s), 006/025 VUs, 169 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+running (3m20.0s), 005/025 VUs, 170 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+running (3m21.0s), 004/025 VUs, 171 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+running (3m22.0s), 003/025 VUs, 172 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+running (3m23.0s), 002/025 VUs, 173 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+running (3m24.0s), 001/025 VUs, 174 complete and 0 interrupted iterations
+fixed_rate ↓ [ 100% ] 023/025 VUs  3m0s  1.00 iters/s
+
+     ✓ publish status 200
+
+     checks.........................: 100.00% 175 out of 175
+     data_received..................: 26 kB   129 B/s
+     data_sent......................: 147 kB  721 B/s
+     dropped_iterations.............: 5       0.024507/s
+     http_req_blocked...............: avg=113.99µs min=11.36µs  med=14.02µs  max=5.66ms   p(90)=408.28µs p(95)=474.43µs
+     http_req_connecting............: avg=48.23µs  min=0s       med=0s       max=601.6µs  p(90)=285.64µs p(95)=331.99µs
+     http_req_duration..............: avg=16.51s   min=748.18ms med=18.81s   max=25.61s   p(90)=25.02s   p(95)=25.27s  
+       { expected_response:true }...: avg=16.51s   min=748.18ms med=18.81s   max=25.61s   p(90)=25.02s   p(95)=25.27s  
+     http_req_failed................: 0.00%   0 out of 175
+     http_req_receiving.............: avg=146.1µs  min=84.5µs   med=138.82µs max=480.77µs p(90)=182.06µs p(95)=215.15µs
+     http_req_sending...............: avg=81.79µs  min=35.31µs  med=55.84µs  max=2.73ms   p(90)=105.71µs p(95)=141.27µs
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s       p(90)=0s       p(95)=0s      
+     http_req_waiting...............: avg=16.51s   min=747.9ms  med=18.81s   max=25.61s   p(90)=25.02s   p(95)=25.27s  
+     http_reqs......................: 175     0.857756/s
+     iteration_duration.............: avg=16.52s   min=760.22ms med=18.82s   max=25.62s   p(90)=25.03s   p(95)=25.28s  
+     iterations.....................: 175     0.857756/s
+     vus............................: 1       min=0          max=24
+     vus_max........................: 25      min=20         max=25
+
+
+running (3m24.0s), 000/025 VUs, 175 complete and 0 interrupted iterations
+fixed_rate ✓ [ 100% ] 000/025 VUs  3m0s  1.00 iters/s

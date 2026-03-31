@@ -1,0 +1,2 @@
+mode,metrics_mode,concurrency,duration,total_reqs,success_reqs,success_rate,start_block,end_block,gas_total,gas_per_req,cpu_seconds_delta,cpu_seconds_per_req,cnet_bytes_delta,cnet_bytes_per_req,average_time_ms,tps
+SNMS,docker-cgroup,1,60s,1,1,1.0,3429,3433,4250880,4250880.0,2.47193,2.47193,390378.0,390378.0,376.0,2.6595744680851063

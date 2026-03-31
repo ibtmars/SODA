@@ -1,0 +1,19 @@
+services:
+  cadvisor:
+    profiles:
+      - monitoring
+
+  ganache:
+    build:
+      context: .
+      dockerfile: chain/Dockerfile
+    container_name: oracle-ganache
+    command: >
+      --host 0.0.0.0
+      --port ${GANACHE_PORT}
+      --chain.chainId ${GANACHE_CHAIN_ID}
+      --wallet.mnemonic "${GANACHE_MNEMONIC}"
+      --wallet.totalAccounts 200
+      --miner.defaultGasPrice 20000000000
+    ports:
+      - "${GANACHE_PORT}:${GANACHE_PORT}"

@@ -1,0 +1,22 @@
+{
+  "workspace": "/home/xxxy/Oracle-code/deploy/docker-lab",
+  "compose_cmd": "sudo docker compose",
+  "adapter_base": "http://127.0.0.1:15000",
+  "node_counts": "16",
+  "rps_values": "1,2,5,10,20,40,60,70,80,90",
+  "duration": "60s",
+  "repeats": 3,
+  "batch_size": 1,
+  "mode": "MNMS",
+  "back_type": 0,
+  "cal_type": 3,
+  "es_count": 7,
+  "req_num": 11,
+  "vus": 50,
+  "max_vus": 500,
+  "http_timeout": "30s",
+  "data_source_url": "http://host.docker.internal:8080/",
+  "data_source_urls": "http://host.docker.internal:8080/,http://host.docker.internal:8081/,http://host.docker.internal:8082/,http://host.docker.internal:8083/,http://host.docker.internal:8084/,http://host.docker.internal:8085/,http://host.docker.internal:8086/",
+  "settle_timeout": 900,
+  "output_dir": "results-node-scale"
+}

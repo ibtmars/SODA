@@ -1,0 +1,23 @@
+{
+  "mode": "MNMS",
+  "fault_type": "bad_es",
+  "back_type": 1,
+  "cal_type": 0,
+  "node_count": 4,
+  "es_count": 7,
+  "target_rps": 1.0,
+  "duration": "180s",
+  "fault_at": 60,
+  "recover_at": 120,
+  "data_source_urls": [
+    "http://host.docker.internal:18080/",
+    "http://host.docker.internal:8081/",
+    "http://host.docker.internal:8082/",
+    "http://host.docker.internal:8083/",
+    "http://host.docker.internal:8084/",
+    "http://host.docker.internal:8085/",
+    "http://host.docker.internal:8086/"
+  ],
+  "compose_cmd": "sudo docker compose",
+  "adapter_base": "http://127.0.0.1:15000"
+}

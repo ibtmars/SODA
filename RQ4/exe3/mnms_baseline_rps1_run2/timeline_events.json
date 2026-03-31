@@ -1,0 +1,42 @@
+[
+  {
+    "name": "run_start",
+    "ts_iso": "2026-03-21T03:07:38.158679Z",
+    "epoch_s": 1774062458.158714,
+    "target_service": null,
+    "second_target_service": null,
+    "leader_service": "oracle-node-2",
+    "active_services": [
+      "oracle-node-1",
+      "oracle-node-2",
+      "oracle-node-3",
+      "oracle-node-4"
+    ]
+  },
+  {
+    "name": "fault_skipped",
+    "ts_iso": "2026-03-21T03:08:38.215395Z",
+    "epoch_s": 1774062518.2154639
+  },
+  {
+    "name": "run_end",
+    "ts_iso": "2026-03-21T03:11:02.309592Z",
+    "epoch_s": 1774062662.3096113,
+    "k6_exit_code": 0
+  },
+  {
+    "name": "records_settle_start",
+    "ts_iso": "2026-03-21T03:11:02.309697Z",
+    "epoch_s": 1774062662.3097055,
+    "timeout_s": 180,
+    "stable_polls": 3
+  },
+  {
+    "name": "records_settle_end",
+    "ts_iso": "2026-03-21T03:11:48.475622Z",
+    "epoch_s": 1774062708.4756484,
+    "total": 178,
+    "right": 178,
+    "wrong": 0
+  }
+]

@@ -1,0 +1,104 @@
+server:
+  port: 15000
+
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/oracle_adapter_10001?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
+  devtools:
+    restart:
+      enabled: true
+      exclude: WEB-INF/**
+      additional-paths: src/main/java
+  thymeleaf:
+    cache: false
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: adapter-10001
+      auto-offset-reset: earliest # 有已提交offset，从提交的offset开始消费；无提交的offset，从头开始消费
+      # auto-offset-reset: latest # 有已提交offset，从提交的offset开始消费；无提交的offset，消费新生成数据
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      enable-auto-commit: false # 是否自动提交
+      # auto-commit-interval: 1000
+    listener:
+      ack-mode: manual_immediate   # 手动确认，立即提交
+      type: single
+    oracle-topic:
+      node-sync: "NODE_SYNC_TOPIC"
+      cert-sync: "CERT_SYNC_TOPIC"
+      rep-sync: "REP_SYNC_TOPIC"
+      req-sync: "REQ_SYNC_TOPIC"
+      req-pub: "REQ_PUB_TOPIC"
+      req-ect-reply: "REQ_ECT_REPLY_TOPIC"
+      req-agt-reply: "REQ_AGT_REPLY_TOPIC"
+      rep-reply: "REP_REPLY_TOPIC"
+
+# 区块链适配器配置
+adapter:
+  id: "1010000027074167130000000001" # 适配器的did，与链上注册的did保持一致
+  contract-adapter-id: "10001" #事件监听、消息回调依靠此ID进行过滤，请确保与RequestManager中设置的chainId一致
+  public-key: "0xc681da47dbdf0d1a771f78ac0b7fddf4362ce763b4c61d6da14fe017b829be9e" # ed25519
+  private-key: "0x02c2907f98248f3e29f98df9bc0ddf2bd96a2439cd92febf4525a9b00e37d2c0"
+
+vrf:
+  enable: false # 是否开启VRF随机数生成
+  url: "http://127.0.0.1:18000" # VRF服务地址
+
+primary-adapter: false # 是否是主链适配器，主链适配器负责身份与声誉的更新管理以及发布
+
+# 主链适配器部署所有合约，从链适配器部署requestManager合约与oracleServiceProxy合约（其他合约同样部署但不使用）
+chain:
+  chain-type: "eth"
+  chain-address: "http://127.0.0.1:7545/"
+  account-entity: # 主适配器需要设置
+    address: "0x07C1AE10c8467C01f4A14Cf914EFA40cfF3749CE"
+    key-type: "private-key" # 密钥类型，目前支持key-store和private-key两种
+    password: "123456"
+    key-store: "{\"address\":\"2965cbdd58eb1aa280485a74cd10dae7b945ea4f\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"ciphertext\":\"fb76690f651016d069d690332221a092ec0aee6d76b1e5c21a77c9a1839fafc2\",\"cipherparams\":{\"iv\":\"a118d70ceef7437bc7650a743a6f88bb\"},\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"d721236d87a0d6be75ac387b5d7bb91b753d14cb7947beeea524d89b1e61025b\"},\"mac\":\"bb09cf3d381e7cb549ece15ad307551b8c5c00d0571391133e8f3593c19d0b59\"},\"id\":\"24e7083e-599d-489c-983d-d3b82e0edb93\",\"version\":3}"
+    private-key: "0x33c9c839620a38f1bbc10728d49b7f6bb55b660d49ab162fa9cbe99b64afd6f8"
+  account-reputation: # 主适配器需要设置
+    address: "0x07C1AE10c8467C01f4A14Cf914EFA40cfF3749CE"
+    key-type: "private-key"
+    password: "123456"
+    key-store: "{\"address\":\"2965cbdd58eb1aa280485a74cd10dae7b945ea4f\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"ciphertext\":\"fb76690f651016d069d690332221a092ec0aee6d76b1e5c21a77c9a1839fafc2\",\"cipherparams\":{\"iv\":\"a118d70ceef7437bc7650a743a6f88bb\"},\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"d721236d87a0d6be75ac387b5d7bb91b753d14cb7947beeea524d89b1e61025b\"},\"mac\":\"bb09cf3d381e7cb549ece15ad307551b8c5c00d0571391133e8f3593c19d0b59\"},\"id\":\"24e7083e-599d-489c-983d-d3b82e0edb93\",\"version\":3}"
+    private-key: "0x33c9c839620a38f1bbc10728d49b7f6bb55b660d49ab162fa9cbe99b64afd6f8"
+  account-request: # 服务代理与请求管理合约使用账户
+    address: "0x07C1AE10c8467C01f4A14Cf914EFA40cfF3749CE"
+    key-type: "private-key"
+    password: "123456"
+    key-store: "{\"address\":\"2965cbdd58eb1aa280485a74cd10dae7b945ea4f\",\"crypto\":{\"cipher\":\"aes-128-ctr\",\"ciphertext\":\"fb76690f651016d069d690332221a092ec0aee6d76b1e5c21a77c9a1839fafc2\",\"cipherparams\":{\"iv\":\"a118d70ceef7437bc7650a743a6f88bb\"},\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"n\":262144,\"p\":1,\"r\":8,\"salt\":\"d721236d87a0d6be75ac387b5d7bb91b753d14cb7947beeea524d89b1e61025b\"},\"mac\":\"bb09cf3d381e7cb549ece15ad307551b8c5c00d0571391133e8f3593c19d0b59\"},\"id\":\"24e7083e-599d-489c-983d-d3b82e0edb93\",\"version\":3}"
+    private-key: "0x33c9c839620a38f1bbc10728d49b7f6bb55b660d49ab162fa9cbe99b64afd6f8"
+  contract:
+    entity-manager: "0xd5c0da1f1c08e9fc0904c8654995efebb1173beb"
+    reputation-manager: "0x3d3e605876417e0bf375d8555aa7603c46197a7b"
+    request-manager: "0x676e70ff376dbc65d312e884a5fae1b5466f5e75"
+    oracle-proxy: "0x4acd591541ad5981b9054da9dc8767cb19598354"
+    cross-chain-evidence: "0x2a2aba66551162ba1551d9773f715638a393504d"
+    request-test: "0x731401dad91cd94b5bc870c77f016d942d4fec1e"
+
+#  contract:# before
+#    entity-manager: "0xe91a85a0a5f4e50d3307783248a4fb12c5aee863"
+#    reputation-manager: "0x9320603c8b4a93ea01730648b017ae5bd430e40f"
+#    request-manager: "0xaa401699f5ad9ab078ec734afa61f92e8b5086bf"
+#    oracle-proxy: "0x225c377cb9a64ed401bd34d09d96a0e359fd92c7"
+#    cross-chain-evidence: "0x5f945ce24c941b1aecb8dd7a43f0d18e5733b8b8"
+#    request-test: "0x863d83bf0ba2884b978826ab2c9cf589bb415f07"
+
+#  contract: # old
+#    entity-manager: "0x9791716da882c5299c50ec6d89f50b80b71254fe"
+#    reputation-manager: "0x98c48bbfd19ea14b92ded88c0e7fbd4b53fc897a"
+#    request-manager: "0xecd6c775bf83380d05c0589d6f8b7fea98f509f1"
+#    oracle-proxy: "0xaabb594bb88a7440b9c20a4ac1fee675c19efbbb"
+#    cross-chain-evidence: "0x2a82eaa47d17d13f0585d420252fd3a5bc3e344e"
+#    request-test: "0xf2533dc3331ce6fde6a087e1186f91b6e5bcadef"

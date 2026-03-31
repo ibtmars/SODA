@@ -1,0 +1,17 @@
+{
+  "mode": "MNSS",
+  "fault_type": "nonleader_crash",
+  "back_type": 1,
+  "cal_type": 0,
+  "node_count": 4,
+  "es_count": 1,
+  "target_rps": 1.0,
+  "duration": "180s",
+  "fault_at": 60,
+  "recover_at": 120,
+  "data_source_urls": [
+    "http://host.docker.internal:8080/"
+  ],
+  "compose_cmd": "sudo docker compose",
+  "adapter_base": "http://127.0.0.1:15000"
+}

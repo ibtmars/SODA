@@ -1,0 +1,14 @@
+Client: Docker Engine - Community
+ Version:    29.2.1
+ Context:    default
+ Debug Mode: false
+ Plugins:
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.31.1
+    Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v5.1.0
+    Path:     /usr/libexec/docker/cli-plugins/docker-compose
+
+Server:
+permission denied while trying to connect to the docker API at unix:///var/run/docker.sock

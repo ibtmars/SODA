@@ -1,0 +1,70 @@
+[
+  {
+    "name": "run_start",
+    "ts_iso": "2026-03-21T02:44:54.308155Z",
+    "epoch_s": 1774061094.3082027,
+    "target_service": "oracle-node-2",
+    "second_target_service": null,
+    "leader_service": "oracle-node-1",
+    "active_services": [
+      "oracle-node-1",
+      "oracle-node-2",
+      "oracle-node-3",
+      "oracle-node-4"
+    ]
+  },
+  {
+    "name": "fault_inject_start",
+    "ts_iso": "2026-03-21T02:45:55.557352Z",
+    "epoch_s": 1774061155.557376,
+    "service": "oracle-node-2",
+    "fault_type": "nonleader_crash",
+    "leader_service_at_fault": "oracle-node-1",
+    "active_services_at_fault": [
+      "oracle-node-1",
+      "oracle-node-2",
+      "oracle-node-3",
+      "oracle-node-4"
+    ]
+  },
+  {
+    "name": "fault_injected",
+    "ts_iso": "2026-03-21T02:45:57.678957Z",
+    "epoch_s": 1774061157.6789944,
+    "service": "oracle-node-2",
+    "leader_service_at_fault": "oracle-node-1"
+  },
+  {
+    "name": "fault_recover_start",
+    "ts_iso": "2026-03-21T02:46:57.702986Z",
+    "epoch_s": 1774061217.703032,
+    "service": "oracle-node-2"
+  },
+  {
+    "name": "fault_recovered",
+    "ts_iso": "2026-03-21T02:46:59.677467Z",
+    "epoch_s": 1774061219.6775033,
+    "service": "oracle-node-2"
+  },
+  {
+    "name": "run_end",
+    "ts_iso": "2026-03-21T02:48:07.613788Z",
+    "epoch_s": 1774061287.61381,
+    "k6_exit_code": 0
+  },
+  {
+    "name": "records_settle_start",
+    "ts_iso": "2026-03-21T02:48:07.613931Z",
+    "epoch_s": 1774061287.6139414,
+    "timeout_s": 180,
+    "stable_polls": 3
+  },
+  {
+    "name": "records_settle_end",
+    "ts_iso": "2026-03-21T02:48:21.668466Z",
+    "epoch_s": 1774061301.6684916,
+    "total": 181,
+    "right": 153,
+    "wrong": 28
+  }
+]

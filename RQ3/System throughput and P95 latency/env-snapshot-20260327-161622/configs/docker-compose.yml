@@ -1,0 +1,552 @@
+name: oracle-lab
+
+x-oracle-node-env: &oracle-node-env
+  SPRING_DATASOURCE_USERNAME: root
+  SPRING_DATASOURCE_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+  SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: ${NODE_DB_POOL_MAX:-2}
+  SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE: ${NODE_DB_POOL_MIN_IDLE:-1}
+  SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+  JAVA_TOOL_OPTIONS: ${NODE_JAVA_TOOL_OPTIONS:--Xms48m -Xmx160m -XX:+UseSerialGC -XX:MaxMetaspaceSize=96m}
+  VRF_URL: http://vrf:18000
+  VRF_ENABLE: "true"
+  CHAIN_CHAIN_ADDRESS: http://ganache:7545/
+  NODE_HTTP_BASE_PORT: ${NODE_HTTP_BASE_PORT}
+  NODE_COMM_BASE_PORT: ${NODE_COMM_BASE_PORT}
+  ORACLE_ID_PREFIX: ${ORACLE_ID_PREFIX:-102000003331954283}
+  ORACLE_ID_BASE_SUFFIX: ${ORACLE_ID_BASE_SUFFIX:-16400}
+  ORACLE_UPDATE: ${ORACLE_UPDATE:-true}
+  SIGNATURE_VERIFY_ENABLED: ${SIGNATURE_VERIFY_ENABLED:-false}
+
+x-oracle-node-common: &oracle-node-common
+  image: oracle-lab-oracle-node
+  build:
+    context: ../..
+    dockerfile: deploy/docker-lab/node/Dockerfile
+  restart: unless-stopped
+  cpus: "${NODE_CPU_LIMIT:-0.20}"
+  mem_limit: "${NODE_MEM_LIMIT:-512m}"
+  depends_on:
+    mysql:
+      condition: service_healthy
+    kafka:
+      condition: service_started
+    oracle-adapter:
+      condition: service_started
+    vrf:
+      condition: service_started
+  environment:
+    <<: *oracle-node-env
+  extra_hosts:
+    - "host.docker.internal:host-gateway"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: oracle-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - "${MYSQL_PORT}:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ../../OracleAdapter/database-dump.sql:/docker-entrypoint-initdb.d/01-dump.sql:ro
+    command:
+      - "--default-authentication-plugin=mysql_native_password"
+      - "--max_connections=${MYSQL_MAX_CONNECTIONS:-1200}"
+      - "--max_user_connections=${MYSQL_MAX_USER_CONNECTIONS:-1000}"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.3
+    container_name: oracle-zookeeper
+    restart: unless-stopped
+    environment:
+      ZOOKEEPER_CLIENT_PORT: ${ZOOKEEPER_PORT}
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "${ZOOKEEPER_PORT}:${ZOOKEEPER_PORT}"
+
+  kafka:
+    image: confluentinc/cp-kafka:7.5.3
+    container_name: oracle-kafka
+    restart: unless-stopped
+    depends_on:
+      - zookeeper
+    ports:
+      - "${KAFKA_PORT}:${KAFKA_PORT}"
+    environment:
+      KAFKA_BROKER_ID: ${KAFKA_BROKER_ID:-1}
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:${ZOOKEEPER_PORT}
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://${KAFKA_ADVERTISED_HOST:-localhost}:${KAFKA_PORT}
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,PLAINTEXT_HOST://0.0.0.0:${KAFKA_PORT}
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+
+
+  ganache:
+    image: trufflesuite/ganache:v7.9.1
+    container_name: oracle-ganache
+    command: >
+      --host 0.0.0.0
+      --port ${GANACHE_PORT}
+      --chain.chainId ${GANACHE_CHAIN_ID}
+      --wallet.mnemonic "${GANACHE_MNEMONIC}"
+      --wallet.totalAccounts 200
+      --miner.defaultGasPrice 20000000000
+    ports:
+      - "${GANACHE_PORT}:${GANACHE_PORT}"
+
+  vrf:
+    build:
+      context: ../..
+      dockerfile: deploy/docker-lab/vrf.Dockerfile
+    container_name: oracle-vrf
+    ports:
+      - "${VRF_PORT}:18000"
+
+  cea:
+    build:
+      context: ../..
+      dockerfile: deploy/docker-lab/cea/Dockerfile
+    container_name: oracle-cea
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/cea_dev?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: ${CEA_DB_POOL_MAX:-4}
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE: ${CEA_DB_POOL_MIN_IDLE:-1}
+      SERVER_PORT: 34567
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - "${CEA_PORT}:34567"
+
+  oracle-adapter:
+    build:
+      context: ../..
+      dockerfile: deploy/docker-lab/adapter/Dockerfile
+    container_name: oracle-adapter
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+      ganache:
+        condition: service_started
+      vrf:
+        condition: service_started
+    environment:
+      SERVER_PORT: 15000
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_adapter_10001?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: ${ADAPTER_DB_POOL_MAX:-16}
+      SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE: ${ADAPTER_DB_POOL_MIN_IDLE:-2}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      CHAIN_CHAIN_ADDRESS: http://ganache:7545/
+      CHAIN_ACCOUNT_ENTITY_PRIVATE_KEY: 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+      CHAIN_ACCOUNT_REPUTATION_PRIVATE_KEY: 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+      CHAIN_ACCOUNT_REQUEST_PRIVATE_KEY: 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+      CHAIN_ACCOUNT_ENTITY_ADDRESS: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+      CHAIN_ACCOUNT_REPUTATION_ADDRESS: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+      CHAIN_ACCOUNT_REQUEST_ADDRESS: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+      CHAIN_CONTRACT_ENTITY_MANAGER: ${CHAIN_CONTRACT_ENTITY_MANAGER}
+      CHAIN_CONTRACT_REPUTATION_MANAGER: ${CHAIN_CONTRACT_REPUTATION_MANAGER}
+      CHAIN_CONTRACT_REQUEST_MANAGER: ${CHAIN_CONTRACT_REQUEST_MANAGER}
+      CHAIN_CONTRACT_ORACLE_PROXY: ${CHAIN_CONTRACT_ORACLE_PROXY}
+      CHAIN_CONTRACT_CROSS_CHAIN_EVIDENCE: ${CHAIN_CONTRACT_CROSS_CHAIN_EVIDENCE}
+      CHAIN_CONTRACT_REQUEST_TEST: ${CHAIN_CONTRACT_REQUEST_TEST}
+      VRF_URL: http://vrf:18000
+      VRF_ENABLE: "true"
+      SIGNATURE_VERIFY_ENABLED: ${SIGNATURE_VERIFY_ENABLED:-false}
+      PRIMARY_ADAPTER: ${PRIMARY_ADAPTER:-true}
+      BENCHMARK_SINGLE_ORACLE_MODE: ${BENCHMARK_SINGLE_ORACLE_MODE:-false}
+      BENCHMARK_SINGLE_ORACLE_ID: ${BENCHMARK_SINGLE_ORACLE_ID:-1020000033319542830000016401}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+    ports:
+      - "${ADAPTER_PORT}:15000"
+
+  oracle-node:
+    <<: *oracle-node-common
+    environment:
+      <<: *oracle-node-env
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_1?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: ${ORACLE_NODE_INDEX:-}
+
+  oracle-node-1:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-1
+    hostname: oracle-node-1
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-1
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_1?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "1"
+
+  oracle-node-2:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-2
+    hostname: oracle-node-2
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-2
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_2?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "2"
+
+  oracle-node-3:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-3
+    hostname: oracle-node-3
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-3
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_3?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "3"
+
+  oracle-node-4:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-4
+    hostname: oracle-node-4
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-4
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_4?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "4"
+
+  oracle-node-5:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-5
+    hostname: oracle-node-5
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-5
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_5?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "5"
+
+  oracle-node-6:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-6
+    hostname: oracle-node-6
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-6
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_6?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "6"
+
+  oracle-node-7:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-7
+    hostname: oracle-node-7
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-7
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_7?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "7"
+
+  oracle-node-8:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-8
+    hostname: oracle-node-8
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-8
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_8?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "8"
+
+  oracle-node-9:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-9
+    hostname: oracle-node-9
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-9
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_9?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "9"
+
+  oracle-node-10:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-10
+    hostname: oracle-node-10
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-10
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_10?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "10"
+
+  oracle-node-11:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-11
+    hostname: oracle-node-11
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-11
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_11?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "11"
+
+  oracle-node-12:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-12
+    hostname: oracle-node-12
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-12
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_12?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "12"
+
+  oracle-node-13:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-13
+    hostname: oracle-node-13
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-13
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_13?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "13"
+
+  oracle-node-14:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-14
+    hostname: oracle-node-14
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-14
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_14?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "14"
+
+  oracle-node-15:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-15
+    hostname: oracle-node-15
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-15
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_15?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "15"
+
+  oracle-node-16:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-16
+    hostname: oracle-node-16
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-16
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_16?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "16"
+
+  oracle-node-17:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-17
+    hostname: oracle-node-17
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-17
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_17?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "17"
+
+  oracle-node-18:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-18
+    hostname: oracle-node-18
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-18
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_18?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "18"
+
+  oracle-node-19:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-19
+    hostname: oracle-node-19
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-19
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_19?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "19"
+
+  oracle-node-20:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-20
+    hostname: oracle-node-20
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-20
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_20?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "20"
+
+  oracle-node-21:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-21
+    hostname: oracle-node-21
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-21
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_21?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "21"
+
+  oracle-node-22:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-22
+    hostname: oracle-node-22
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-22
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_22?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "22"
+
+  oracle-node-23:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-23
+    hostname: oracle-node-23
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-23
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_23?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "23"
+
+  oracle-node-24:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-24
+    hostname: oracle-node-24
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-24
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_24?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "24"
+
+  oracle-node-25:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-25
+    hostname: oracle-node-25
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-25
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_25?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "25"
+
+  oracle-node-26:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-26
+    hostname: oracle-node-26
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-26
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_26?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "26"
+
+  oracle-node-27:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-27
+    hostname: oracle-node-27
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-27
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_27?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "27"
+
+  oracle-node-28:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-28
+    hostname: oracle-node-28
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-28
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_28?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "28"
+
+  oracle-node-29:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-29
+    hostname: oracle-node-29
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-29
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_29?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "29"
+
+  oracle-node-30:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-30
+    hostname: oracle-node-30
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-30
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_30?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "30"
+
+  oracle-node-31:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-31
+    hostname: oracle-node-31
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-31
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_31?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "31"
+
+  oracle-node-32:
+    <<: *oracle-node-common
+    container_name: oracle-lab-oracle-node-32
+    hostname: oracle-node-32
+    environment:
+      <<: *oracle-node-env
+      ORACLE_COMM_LOCAL: oracle-node-32
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/oracle_node_32?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      ORACLE_NODE_INDEX: "32"
+
+  contract-deployer:
+    build:
+      context: ../..
+      dockerfile: deploy/docker-lab/contract/Dockerfile
+    container_name: oracle-contract-deployer
+    depends_on:
+      ganache:
+        condition: service_started
+    volumes:
+      - ${CONTRACT_CONFIG_FILE}:/app/config.yml
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    entrypoint: ["java", "-jar", "app.jar"]
+    command: ["deploy", "all"]
+
+  cadvisor:
+    image: ${CADVISOR_IMAGE:-registry.cn-hangzhou.aliyuncs.com/google_containers/cadvisor:v0.47.2}
+    container_name: oracle-cadvisor
+    ports:
+      - "8088:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /home/docker-data/:/var/lib/docker:ro
+
+  prometheus:
+    image: prom/prometheus:v2.54.1
+    container_name: oracle-prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9099:9090"
+
+  k6:
+    image: grafana/k6:0.54.0
+    container_name: oracle-k6
+    working_dir: /scripts
+    volumes:
+      - ./k6:/scripts
+    entrypoint: ["k6"]
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  mysql-data:

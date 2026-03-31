@@ -1,0 +1,7 @@
+  services:
+    oracle-adapter:
+      environment:
+        VRF_ENABLE: "false"
+    oracle-node:
+      environment:
+        VRF_ENABLE: "false"

@@ -1,0 +1,103 @@
+server:
+  port: 16001
+
+mybatis-plus:
+  configuration:
+    log-impl: ${performance.logging.mybatis-log-impl:org.apache.ibatis.logging.nologging.NoLoggingImpl}
+
+spring:
+  main:
+    log-startup-info: false
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/oracle_node_1?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
+  devtools:
+    restart:
+      enabled: true
+      exclude: WEB-INF/**
+      additional-paths: src/main/java
+  thymeleaf:
+    cache: false
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: oracle-1
+      auto-offset-reset: earliest # 有已提交offset，从提交的offset开始消费；无提交的offset，从头开始消费
+      # auto-offset-reset: latest # 有已提交offset，从提交的offset开始消费；无提交的offset，消费新生成数据
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      enable-auto-commit: false # 是否自动提交
+      # auto-commit-interval: 1000
+    listener:
+      ack-mode: manual_immediate   # 手动确认，立即提交
+      type: single
+    oracle-topic:
+      node-sync: "NODE_SYNC_TOPIC"
+      cert-sync: "CERT_SYNC_TOPIC"
+      rep-sync: "REP_SYNC_TOPIC"
+      req-sync: "REQ_SYNC_TOPIC"
+      req-pub: "REQ_PUB_TOPIC"
+      req-ect-reply: "REQ_ECT_REPLY_TOPIC"
+      req-agt-reply: "REQ_AGT_REPLY_TOPIC"
+      rep-reply: "REP_REPLY_TOPIC"
+
+# 预言机节点配置
+oracle:
+  id: "1020000033319542830000016401" # 修复：将节点ID修改为合约分配任务列表中存在的ID
+  public-key: "0xc681da47dbdf0d1a771f78ac0b7fddf4362ce763b4c61d6da14fe017b829be9e" # ed25519
+  private-key: "0x02c2907f98248f3e29f98df9bc0ddf2bd96a2439cd92febf4525a9b00e37d2c0"
+  update: true # 是否更新数据库
+  comm:
+    local: "127.0.0.1"
+    port: 16101
+
+consensus:
+  type: RODAA
+  commit-gate: 0.67
+
+logging:
+  level:
+    root: ${performance.logging.root-level:OFF}
+    oracle.block: ${performance.logging.business-level:OFF}
+    org.buaa.oraclenode: ${performance.logging.business-level:OFF}
+    org.buaa.oraclenode.comm.netty: ${performance.logging.key-business-level:INFO}
+    org.buaa.oraclenode.consensus.records.ConsensusRecordsService: ${performance.logging.key-business-level:INFO}
+    org.buaa.oraclenode.consensus.single.SingleNodeConsensusImpl: ${performance.logging.key-business-level:INFO}
+    org.buaa.oraclenode.core.MessageCallBackHandler: ${performance.logging.key-business-level:INFO}
+    org.buaa.oraclenode.es.ExtendServiceAccess: ${performance.logging.key-business-level:INFO}
+    org.buaa.oraclenode.kafka.listener.RequestPublishListener: ${performance.logging.key-business-level:INFO}
+    org.buaa.oraclenode.service.Ed25519SignService: ${performance.logging.key-business-level:INFO}
+    org.buaa.oraclenode.service.RequestPublishReplyService: ${performance.logging.key-business-level:INFO}
+    org.buaa.oraclenode.utils.DataAggregationUtil: ${performance.logging.key-business-level:INFO}
+    org.springframework: ${performance.logging.framework-level:OFF}
+    org.springframework.boot: ${performance.logging.framework-level:OFF}
+    org.springframework.kafka: ${performance.logging.framework-level:OFF}
+    org.apache.kafka: ${performance.logging.framework-level:OFF}
+    org.mybatis: ${performance.logging.framework-level:OFF}
+    org.apache.ibatis: ${performance.logging.framework-level:OFF}
+    org.hibernate: ${performance.logging.framework-level:OFF}
+    org.apache.catalina: ${performance.logging.framework-level:OFF}
+    org.apache.coyote: ${performance.logging.framework-level:OFF}
+    org.apache.tomcat: ${performance.logging.framework-level:OFF}
+    org.web3j: ${performance.logging.framework-level:OFF}
+    org.web3j.protocol.http.HttpService: ${performance.logging.framework-level:OFF}
+    com.zaxxer.hikari: ${performance.logging.framework-level:OFF}
+    io.netty: ${performance.logging.framework-level:OFF}
+
+performance:
+  logging:
+    root-level: OFF
+    business-level: OFF
+    key-business-level: OFF
+    framework-level: OFF
+    mybatis-log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+
+vrf:
+  enable: false # 是否开启VRF随机数生成
+  url: "http://127.0.0.1:18000" # VRF服务地址
+
